@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<id>albertlast:smf_benchmark</id>
+	<name>SMF-Benchmark</name>
+	<version>1</version>
+	<type>modification</type>
+
+	<install for="2.1 Beta 3">
+		<readme type="file" parsebbc="true">readme.txt</readme>
+		<require-dir name="Themes" destination="$boarddir">Theme files</require-dir>
+		<require-dir name="Sources/SMFBenchmark" destination="$sourcedir">Source files</require-dir>
+		<code>installer/installHooks2.1.php</code>
+	</install>
+	<uninstall for="2.1 Beta 3">
+		<code>installer/uninstall2.1.php</code>
+		<remove-dir name="$sourcedir/SMFBenchmark" />
+		<remove-file name="$themedir/SMFBenchmark.template.php" />
+		<remove-file name="$languagedir/SMFBenchmark.english.php" />
+	</uninstall>
+</package-info>
