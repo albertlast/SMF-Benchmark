@@ -49,7 +49,7 @@ $txt['benchmark_usercreate_info'] = 'Create as many users as possible in one min
 $txt['benchmark_post_info'] = 'Create as many posts as possible in one minute <br/> This test is db insert performance heavy'; 
 $txt['benchmark_topic'] = 'Benchmark methods';
 $txt['benchmark_postread'] = 'Reading Posts';
-$txt['benchmark_postread_info'] = 'Repeatedly access a topic for 1 minute. <br /> This test depends heavily on the size of your board and the active features.';
+$txt['benchmark_postread_info'] = 'Repeatedly access a topic for one minute. <br /> This test depends heavily on the size of your board and the active features.';
 $txt['benchmark_result'] = 'Result of Benchmark';
 
 // Admin.english.php
