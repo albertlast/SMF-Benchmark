@@ -2,7 +2,7 @@
 
 /**
 * @package manifest file for SMF-Benchmark
-* @version 1
+* @version 1.1
 * @author albertlast (http://www.simplemachines.org/community/index.php?action=profile;u=226111)
 * @copyright Copyright (c) 2017
 * @license BSD 3-Clause License

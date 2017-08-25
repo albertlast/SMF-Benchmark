@@ -2,7 +2,7 @@
 
 /**
 * @package manifest file for SMF-Benchmark
-* @version 1
+* @version 1.1
 * @author albertlast (http://www.simplemachines.org/community/index.php?action=profile;u=226111)
 * @copyright Copyright (c) 2017
 * @license BSD 3-Clause License
@@ -47,6 +47,8 @@ class SMFBenchmark {
 
 	public static function addManageMaintenancePanel(&$subActions) {
 		global $context;
+		
+		loadTemplate('SMFBenchmark');
 
 		$context[$context['admin_menu_name']]['tab_data']['tabs']['benchmark'] = array();
 
@@ -65,17 +67,14 @@ class SMFBenchmark {
 	public static function addAdminPanel(&$areas) {
 		global $txt;
 		
+		loadLanguage('SMFBenchmark');
+
 		$areas['maintenance']['areas']['maintain']['subsections'] =	array_merge(
 																		$areas['maintenance']['areas']['maintain']['subsections'] ,
 																		array(
 																			'benchmark' => array($txt['maintain_sub_benchmark'], 'admin_forum')
 																		)
 																	);
-	}
-
-	public static function initialPageLoad(&$subActions)
-	{
-		loadTemplate('SMFBenchmark');
 	}
 
 	/**

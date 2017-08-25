@@ -2,7 +2,7 @@
 
 /**
 * @package manifest file for SMF-Benchmark
-* @version 1
+* @version 1.1
 * @author albertlast (http://www.simplemachines.org/community/index.php?action=profile;u=226111)
 * @copyright Copyright (c) 2017
 * @license BSD 3-Clause License
@@ -50,5 +50,4 @@ if (file_exists(dirname(__FILE__) . '/SSI.php') && !defined('SMF')) {
 add_integration_function('integrate_pre_include', '$sourcedir/SMFBenchmark/Class-SMFBenchmark.php');
 add_integration_function('integrate_manage_maintenance', 'SMFBenchmark::addManageMaintenancePanel');
 add_integration_function('integrate_admin_areas', 'SMFBenchmark::addAdminPanel');
-add_integration_function('integrate_manage_maintenance', 'SMFBenchmark::initialPageLoad');
 ?>

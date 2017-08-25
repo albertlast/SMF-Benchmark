@@ -2,7 +2,7 @@
 
 /**
 * @package manifest file for SMF-Benchmark
-* @version 1
+* @version 1.1
 * @author albertlast (http://www.simplemachines.org/community/index.php?action=profile;u=226111)
 * @copyright Copyright (c) 2017
 * @license BSD 3-Clause License
@@ -48,11 +48,8 @@ if (file_exists(dirname(__FILE__) . '/SSI.php') && !defined('SMF'))
 elseif (!defined('SMF'))
 	die('<b>Error:</b> Cannot uninstall - please verify you put this in the same place as SMF\'s index.php.');
 
-remove_integration_function('integrate_pre_include', '$sourcedir/LikePostsIndex.php');
-remove_integration_function('integrate_actions', 'LP_addActionContext', true);
-remove_integration_function('integrate_load_theme', 'LP_includeAssets', true);
-remove_integration_function('integrate_menu_buttons', 'LP_addMenuItems');
-remove_integration_function('integrate_admin_areas', 'LP_addAdminPanel');
-remove_integration_function('integrate_profile_areas', 'LP_addProfilePanel');
+remove_integration_function('integrate_pre_include', '$sourcedir/SMFBenchmark/Class-SMFBenchmark.php');
+remove_integration_function('integrate_manage_maintenance', 'SMFBenchmark::addManageMaintenancePanel');
+remove_integration_function('integrate_admin_areas', 'SMFBenchmark::addAdminPanel');
 
 ?>
