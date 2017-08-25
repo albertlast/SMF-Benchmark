@@ -44,29 +44,12 @@ if (!defined('SMF'))
 	die('Hacking attempt...');
 
 class SMFBenchmark {
-	
-	private static $instance;
-	
-	/**
-	 * Singleton method
-	 *
-	 * @return SMFBenchmark
-	 */
-	public static function getInstance() {
-		if (self::$instance === null) {
-			self::$instance = new SMFBenchmark();
-			loadLanguage('SMFBenchmark');
-		}
-		return self::$instance;
-	}
-	
-	private function __construct() {}
-	
+
 	public static function addManageMaintenancePanel(&$subActions) {
 		global $context;
-		
+
 		$context[$context['admin_menu_name']]['tab_data']['tabs']['benchmark'] = array();
-	
+
 		$subActions['benchmark'] =	 array(
 								'function' => 'SMFBenchmark::MaintainBenchmark',
 								'template' => 'maintain_Benchmark',
@@ -78,7 +61,7 @@ class SMFBenchmark {
 							
 						);
 	}
-	
+
 	public static function addAdminPanel(&$areas) {
 		global $txt;
 		
@@ -89,32 +72,33 @@ class SMFBenchmark {
 																		)
 																	);
 	}
-	
+
 	public static function initialPageLoad(&$subActions)
 	{
 		loadTemplate('SMFBenchmark');
 	}
-	
+
 	/**
 	 * Benchmark for User creation tries to create as many as possible in 1 minute
 	 * It requires the admin_forum permission.
 	 * It shows as the maintain_forum admin area.
 	 * It is accessed from ?action=admin;area=maintain;sa=benchmark;activity=usercreate.
 	 * It also updates the optimize scheduled task such that the tables are not automatically optimized again too soon.
-
+	 *
 	 * @uses the benchmarkresult sub template
 	 */
 	public static function UserCreate()
 	{
 		global $db_prefix, $txt, $context, $smcFunc, $sourcedir;
-		
+
 		require_once($sourcedir . '/Subs-Members.php');
-		
+
 		$prefixUsername = 'UserCreateBench';
 		$count = 0;
 		$usersID = array();
 		$start = 0;
 		$maxRuntime = 60;
+		$cleanupTime = 40;
 
 		isAllowedTo('admin_forum');
 
@@ -131,13 +115,13 @@ class SMFBenchmark {
 		$context['sub_template'] = 'benchmarkresult';
 		$context['continue_post_data'] = '';
 		$context['continue_countdown'] = 3;
-		
+
 		// Try for extra time
-		@set_time_limit(100);
-		
+		@set_time_limit($cleanupTime + $maxRuntime);
+
 		$start = microtime(true);
 		$end = $start + $maxRuntime;
-		
+
 		while (microtime(true) < $end)
 		{
 			$regOptions = array(
@@ -184,6 +168,7 @@ class SMFBenchmark {
 		$userID = 0;
 		$start = 0;
 		$maxRuntime = 60;
+		$cleanupTime = 40;
 		$username = $prefixUsername . '_' . $count;
 		$email = $username . '@' . $_SERVER['SERVER_NAME'] . (strpos($_SERVER['SERVER_NAME'], '.') === FALSE ? '.com' : '');
 		$postid = 0;
@@ -227,7 +212,7 @@ class SMFBenchmark {
 		$userID = registerMember($regOptions);
 		
 		// Try for extra time
-		@set_time_limit(100);
+		@set_time_limit($cleanupTime + $maxRuntime);
 		
 		//create the inital topic
 		$msgOptions = array(
@@ -236,7 +221,7 @@ class SMFBenchmark {
 			'approved' => TRUE
 		);
 
-		$topicOptions = $topicOptions = array(
+		$topicOptions = array(
 					'board' => $boardid,
 					'mark_as_read' => TRUE,
 				);
@@ -275,25 +260,26 @@ class SMFBenchmark {
 	 * It shows as the maintain_forum admin area.
 	 * It is accessed from ?action=admin;area=maintain;sa=benchmark;activity=postread.
 	 * It also updates the optimize scheduled task such that the tables are not automatically optimized again too soon.
-
+	 *
 	 * @uses the benchmarkresult sub template
 	 */
 	public static function PostRead()
 	{
 		global $db_prefix, $txt, $context, $smcFunc, $sourcedir, $topic, $board;
-		
+
 		require_once($sourcedir . '/Subs-Members.php');
 		require_once($sourcedir . '/Display.php');
 		require_once($sourcedir . '/Load.php');
-		
+
 		$prefixUsername = 'UserCreateBench';
 		$count = 0;
 		$usersID = array();
 		$start = 0;
 		$maxRuntime = 60;
+		$cleanupTime = 40;
 		$topicid = 0;
 		$boardid = 0;
-		
+
 		// find a topic
 		$request = $smcFunc['db_query']('', '
 			SELECT id_topic, id_board
@@ -322,16 +308,15 @@ class SMFBenchmark {
 		$context['continue_post_data'] = '';
 		$context['continue_countdown'] = 3;
 
-		
-		// Try for extra time
-		@set_time_limit(100);
-		
-		$start = microtime(true);
-		$end = $start + $maxRuntime;
-		
 		// catch all output	
 		ob_start();
-		
+
+		// Try for extra time
+		@set_time_limit($cleanupTime + $maxRuntime);
+
+		$start = microtime(true);
+		$end = $start + $maxRuntime;
+
 		while (microtime(true) < $end)
 		{
 			$topic = $topicid;
@@ -340,14 +325,12 @@ class SMFBenchmark {
 			Display();
 			$count++;
 		}
-		
+
 		// throw the output away
 		ob_end_clean();
-		
+
 		$context['benchmark_result']['amount'] = $count;
 		$context['benchmark_result']['test_name'] = $txt['benchmark_postread'];
 		deleteMembers($usersID);
 	}
 }
-
-SMFBenchmark::getInstance();
