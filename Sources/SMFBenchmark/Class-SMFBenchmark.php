@@ -52,16 +52,15 @@ class SMFBenchmark {
 
 		$context[$context['admin_menu_name']]['tab_data']['tabs']['benchmark'] = array();
 
-		$subActions['benchmark'] =	 array(
-								'function' => 'SMFBenchmark::MaintainBenchmark',
-								'template' => 'maintain_Benchmark',
-								'activities' => array(
-									'usercreate' => 'SMFBenchmark::UserCreate',
-									'postcreate' => 'SMFBenchmark::PostCreate',
-									'postread' => 'SMFBenchmark::PostRead',
-								),
-							
-						);
+		$subActions['benchmark'] = [
+			'function' => 'SMFBenchmark::MaintainBenchmark',
+			'template' => 'maintain_Benchmark',
+			'activities' => [
+				'usercreate' => 'SMFBenchmark::UserCreate',
+				'postcreate' => 'SMFBenchmark::PostCreate',
+				'postread' => 'SMFBenchmark::PostRead',
+			],
+		];
 	}
 
 	public static function addAdminPanel(&$areas) {
@@ -70,11 +69,11 @@ class SMFBenchmark {
 		loadLanguage('SMFBenchmark');
 
 		$areas['maintenance']['areas']['maintain']['subsections'] =	array_merge(
-																		$areas['maintenance']['areas']['maintain']['subsections'] ,
-																		array(
-																			'benchmark' => array($txt['maintain_sub_benchmark'], 'admin_forum')
-																		)
-																	);
+			$areas['maintenance']['areas']['maintain']['subsections'] ,
+			[
+				'benchmark' => array($txt['maintain_sub_benchmark'], 'admin_forum')
+			]
+		);
 	}
 
 	/**
@@ -175,10 +174,10 @@ class SMFBenchmark {
 		
 		// find a board
 		$request = $smcFunc['db_query']('', '
-						SELECT id_board
-						FROM {db_prefix}boards
-						LIMIT 1',
-						array()
+			SELECT id_board
+			FROM {db_prefix}boards
+			LIMIT 1',
+			array()
 		);
 
 		$row = $smcFunc['db_fetch_assoc']($request);
@@ -200,13 +199,13 @@ class SMFBenchmark {
 		$context['continue_post_data'] = '';
 		$context['continue_countdown'] = 3;
 		
-		$regOptions = array(
-				'interface' => 'admin',
-				'username' => $prefixUsername . $count,
-				'email' => $email,
-				'password' => '',
-				'require' => 'nothing'
-			);
+		$regOptions = [
+			'interface' => 'admin',
+			'username' => $prefixUsername . $count,
+			'email' => $email,
+			'password' => '',
+			'require' => 'nothing'
+		];
 
 		$userID = registerMember($regOptions);
 		
@@ -214,23 +213,23 @@ class SMFBenchmark {
 		@set_time_limit($cleanupTime + $maxRuntime);
 		
 		//create the inital topic
-		$msgOptions = array(
+		$msgOptions = [
 			'subject' => 'Post Benchmark Topic',
 			'body' => 'nothing',
 			'approved' => TRUE
-		);
+		];
 
-		$topicOptions = array(
-					'board' => $boardid,
-					'mark_as_read' => TRUE,
-				);
+		$topicOptions = [
+			'board' => $boardid,
+			'mark_as_read' => TRUE,
+		];
 
-		$posterOptions = array(
+		$posterOptions = [
 			'id' => $userID,
 			'name' => $username,
 			'email' => $email,
 			'update_post_count' => TRUE,
-		);
+		];
 
 		createPost($msgOptions, $topicOptions, $posterOptions);
 		
@@ -280,10 +279,10 @@ class SMFBenchmark {
 
 		// find a topic
 		$request = $smcFunc['db_query']('', '
-						SELECT id_topic, id_board
-						FROM {db_prefix}topics
-						LIMIT 1',
-						array()
+			SELECT id_topic, id_board
+			FROM {db_prefix}topics
+			LIMIT 1',
+			array()
 		);
 
 		$row = $smcFunc['db_fetch_assoc']($request);
