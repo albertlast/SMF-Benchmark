@@ -44,7 +44,7 @@
  */
 function template_maintain_benchmark()
 {
-	global $context, $txt, $scripturl, $modSettings;
+	global $context, $txt, $scripturl;
 
 	// If maintenance has finished tell the user.
 	if (!empty($context['maintenance_finished']))
