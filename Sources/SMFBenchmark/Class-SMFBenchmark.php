@@ -156,7 +156,7 @@ class SMFBenchmark {
 	 */
 	public static function PostCreate()
 	{
-		global $db_prefix, $txt, $context, $smcFunc, $sourcedir;
+		global $txt, $context, $smcFunc, $sourcedir;
 		
 		require_once($sourcedir . '/Subs-Members.php');
 		require_once($sourcedir . '/Subs-Post.php');
@@ -175,10 +175,10 @@ class SMFBenchmark {
 		
 		// find a board
 		$request = $smcFunc['db_query']('', '
-			SELECT id_board
-			FROM {db_prefix}boards
-			LIMIT 1',
-			array()
+						SELECT id_board
+						FROM {db_prefix}boards
+						LIMIT 1',
+						array()
 		);
 
 		$row = $smcFunc['db_fetch_assoc']($request);
@@ -264,13 +264,12 @@ class SMFBenchmark {
 	 */
 	public static function PostRead()
 	{
-		global $db_prefix, $txt, $context, $smcFunc, $sourcedir, $topic, $board;
+		global $txt, $context, $smcFunc, $sourcedir, $topic, $board;
 
 		require_once($sourcedir . '/Subs-Members.php');
 		require_once($sourcedir . '/Display.php');
 		require_once($sourcedir . '/Load.php');
 
-		$prefixUsername = 'UserCreateBench';
 		$count = 0;
 		$usersID = array();
 		$start = 0;
@@ -281,10 +280,10 @@ class SMFBenchmark {
 
 		// find a topic
 		$request = $smcFunc['db_query']('', '
-			SELECT id_topic, id_board
-			FROM {db_prefix}topics
-			LIMIT 1',
-			array()
+						SELECT id_topic, id_board
+						FROM {db_prefix}topics
+						LIMIT 1',
+						array()
 		);
 
 		$row = $smcFunc['db_fetch_assoc']($request);
