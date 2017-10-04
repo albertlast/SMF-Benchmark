@@ -18,5 +18,7 @@
 		<remove-dir name="$sourcedir/SMFBenchmark" />
 		<remove-file name="$themedir/SMFBenchmark.template.php" />
 		<remove-file name="$languagedir/SMFBenchmark.english.php" />
+		<remove-file name="$languagedir/SMFBenchmark.russian.php" />
+		<remove-file name="$languagedir/SMFBenchmark.russian-utf8.php" />
 	</uninstall>
 </package-info>
