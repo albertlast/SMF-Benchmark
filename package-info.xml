@@ -19,17 +19,4 @@
 		<remove-file name="$themedir/SMFBenchmark.template.php" />
 		<remove-file name="$languagedir/SMFBenchmark.english.php" />
 	</uninstall>
-	<install for="2.1 Beta 4">
-		<readme type="file" parsebbc="true">readme.txt</readme>
-		<require-dir name="Themes" destination="$boarddir">Theme files</require-dir>
-		<require-dir name="Sources/SMFBenchmark" destination="$sourcedir">Source files</require-dir>
-		<code>installer/installHooks2.1.php</code>
-		<redirect url="?action=admin;area=maintain;sa=benchmark" type="inline" timeout="2000">Please stand by while you are being redirected to benchmark side.</redirect>
-	</install>
-	<uninstall for="2.1 Beta 4">
-		<code>installer/uninstall2.1.php</code>
-		<remove-dir name="$sourcedir/SMFBenchmark" />
-		<remove-file name="$themedir/SMFBenchmark.template.php" />
-		<remove-file name="$languagedir/SMFBenchmark.english.php" />
-	</uninstall>
 </package-info>
