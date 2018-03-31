@@ -87,7 +87,7 @@ class SMFBenchmark {
 	 */
 	public static function UserCreate()
 	{
-		global $db_prefix, $txt, $context, $smcFunc, $sourcedir;
+		global $db_prefix, $txt, $context, $smcFunc, $sourcedir, $db_show_debug;
 
 		require_once($sourcedir . '/Subs-Members.php');
 
@@ -97,6 +97,11 @@ class SMFBenchmark {
 		$start = 0;
 		$maxRuntime = 60;
 		$cleanupTime = 40;
+		if (!empty($db_show_debug))
+		{
+			$db_show_debug_old = $db_show_debug;
+			unset($db_show_debug);
+		}
 
 		isAllowedTo('admin_forum');
 
@@ -137,6 +142,9 @@ class SMFBenchmark {
 		$context['benchmark_result']['amount'] = $count;
 		$context['benchmark_result']['test_name'] = $txt['benchmark_usercreate'];
 		deleteMembers($usersID);
+
+		if (!empty($db_show_debug_old))
+			$db_show_debug = $db_show_debug_old;
 	}
 
 	/**
@@ -155,7 +163,7 @@ class SMFBenchmark {
 	 */
 	public static function PostCreate()
 	{
-		global $txt, $context, $smcFunc, $sourcedir;
+		global $txt, $context, $smcFunc, $sourcedir, $db_show_debug;
 		
 		require_once($sourcedir . '/Subs-Members.php');
 		require_once($sourcedir . '/Subs-Post.php');
@@ -171,6 +179,11 @@ class SMFBenchmark {
 		$email = $username . '@' . $_SERVER['SERVER_NAME'] . (strpos($_SERVER['SERVER_NAME'], '.') === FALSE ? '.com' : '');
 		$postid = 0;
 		$boardid = 0;
+		if (!empty($db_show_debug))
+		{
+			$db_show_debug_old = $db_show_debug;
+			unset($db_show_debug);
+		}
 		
 		// find a board
 		$request = $smcFunc['db_query']('', '
@@ -250,6 +263,9 @@ class SMFBenchmark {
 		$context['benchmark_result']['test_name'] = $txt['benchmark_post'];
 		
 		deleteMembers($userID);
+
+		if (!empty($db_show_debug_old))
+			$db_show_debug = $db_show_debug_old;
 	}
 
 	/**
@@ -263,7 +279,7 @@ class SMFBenchmark {
 	 */
 	public static function PostRead()
 	{
-		global $txt, $context, $smcFunc, $sourcedir, $topic, $board;
+		global $txt, $context, $smcFunc, $sourcedir, $topic, $board, $db_show_debug;
 
 		require_once($sourcedir . '/Subs-Members.php');
 		require_once($sourcedir . '/Display.php');
@@ -276,6 +292,11 @@ class SMFBenchmark {
 		$cleanupTime = 40;
 		$topicid = 0;
 		$boardid = 0;
+		if (!empty($db_show_debug))
+		{
+			$db_show_debug_old = $db_show_debug;
+			unset($db_show_debug);
+		}
 
 		// find a topic
 		$request = $smcFunc['db_query']('', '
@@ -329,5 +350,8 @@ class SMFBenchmark {
 		$context['benchmark_result']['amount'] = $count;
 		$context['benchmark_result']['test_name'] = $txt['benchmark_postread'];
 		deleteMembers($usersID);
+
+		if (!empty($db_show_debug_old))
+			$db_show_debug = $db_show_debug_old;
 	}
 }
