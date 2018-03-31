@@ -44,13 +44,19 @@
  */
 function template_maintain_benchmark()
 {
-	global $context, $txt, $scripturl;
+	global $context, $txt, $scripturl, $db_show_debug;
 
 	// If maintenance has finished tell the user.
 	if (!empty($context['maintenance_finished']))
 		echo '
 			<div class="infobox">
 				', sprintf($txt['maintain_done'], $context['maintenance_finished']), '
+			</div>';
+
+	if (!empty($db_show_debug))
+		echo '
+			<div class="errorbox">
+				', $txt['benchmark_db_show_debug'], '
 			</div>';
 
 	echo '

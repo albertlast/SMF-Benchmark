@@ -42,18 +42,16 @@
 
 global $txt;
 
-// ManageMaintenance.english.php
-$txt['benchmark_usercreate'] = 'Creating User';
-$txt['benchmark_post'] = 'Creating Posts';
-$txt['benchmark_usercreate_info'] = 'Create as many users as possible in one minute <br/> This test is cpu heavy';
-$txt['benchmark_post_info'] = 'Create as many posts as possible in one minute <br/> This test is db insert performance heavy'; 
-$txt['benchmark_topic'] = 'Benchmark methods';
-$txt['benchmark_postread'] = 'Reading Posts';
-$txt['benchmark_postread_info'] = 'Repeatedly access a topic for one minute. <br /> This test depends heavily on the size of your board and the active features.';
-$txt['benchmark_result'] = 'Result of Benchmark';
+// ManageMaintenance.russian.php
+$txt['benchmark_usercreate'] = 'Создание пользователей';
+$txt['benchmark_post'] = 'Создание сообщений';
+$txt['benchmark_usercreate_info'] = 'Создание максимально возможного количества пользователей за одну минуту<br/> Этот тест зависит от производительности CPU';
+$txt['benchmark_post_info'] = 'Создание максимально возможного количества сообщений за одну минуту <br/> Этот тест зависит от скорости вставки записей в БД';
+$txt['benchmark_topic'] = 'Методы тестирования';
+$txt['benchmark_postread'] = 'Чтение сообщений';
+$txt['benchmark_postread_info'] = 'Повторяющееся обращение к теме в течение одной минуты <br /> Этот тест зависит от размера форума и включенных опций';
+$txt['benchmark_result'] = 'Результат теста';
 $txt['benchmark_db_show_debug'] = 'Please disable db_show_debug, otherwise your system get unstable when you run the benchmark.';
 
-// Admin.english.php
-$txt['maintain_sub_benchmark'] = 'Benchmark';
-
-?>
+// Admin.russian.php
+$txt['maintain_sub_benchmark'] = 'Тест производительности';

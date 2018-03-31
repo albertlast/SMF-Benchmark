@@ -42,18 +42,16 @@
 
 global $txt;
 
-// ManageMaintenance.english.php
-$txt['benchmark_usercreate'] = 'Creating User';
-$txt['benchmark_post'] = 'Creating Posts';
-$txt['benchmark_usercreate_info'] = 'Create as many users as possible in one minute <br/> This test is cpu heavy';
-$txt['benchmark_post_info'] = 'Create as many posts as possible in one minute <br/> This test is db insert performance heavy'; 
-$txt['benchmark_topic'] = 'Benchmark methods';
-$txt['benchmark_postread'] = 'Reading Posts';
-$txt['benchmark_postread_info'] = 'Repeatedly access a topic for one minute. <br /> This test depends heavily on the size of your board and the active features.';
-$txt['benchmark_result'] = 'Result of Benchmark';
+// ManageMaintenance.russian.php
+$txt['benchmark_usercreate'] = '�������� �������������';
+$txt['benchmark_post'] = '�������� ���������';
+$txt['benchmark_usercreate_info'] = '�������� ����������� ���������� ���������� ������������� �� ���� ������<br/> ���� ���� ������� �� ������������������ CPU';
+$txt['benchmark_post_info'] = '�������� ����������� ���������� ���������� ��������� �� ���� ������ <br/> ���� ���� ������� �� �������� ������� ������� � ��';
+$txt['benchmark_topic'] = '������ ������������';
+$txt['benchmark_postread'] = '������ ���������';
+$txt['benchmark_postread_info'] = '������������� ��������� � ���� � ������� ����� ������ <br /> ���� ���� ������� �� ������� ������ � ���������� �����';
+$txt['benchmark_result'] = '��������� �����';
 $txt['benchmark_db_show_debug'] = 'Please disable db_show_debug, otherwise your system get unstable when you run the benchmark.';
 
-// Admin.english.php
-$txt['maintain_sub_benchmark'] = 'Benchmark';
-
-?>
+// Admin.russian.php
+$txt['maintain_sub_benchmark'] = '���� ������������������';
